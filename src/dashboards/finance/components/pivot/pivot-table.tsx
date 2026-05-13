@@ -273,14 +273,14 @@ export const PivotTable = memo(function PivotTable({
               {kpiRows.map((row) => {
                 const meta = KPI_META[row.kpiType]
                 const tooltip = KPI_TOOLTIPS[row.kpiType]
-                const Icon = meta?.icon
                 return (
                   <tr
                     key={row.kpiType}
                     className={cn(
                       meta?.rowBg ?? 'bg-white dark:bg-transparent',
                       'border-b border-border/40 last:border-0',
-                      meta?.dividerAbove && 'border-t-2 border-t-border/60'
+                      meta?.dividerAbove && 'border-t-2 border-t-border/60',
+                      'transition-colors duration-150 hover:bg-muted/50'
                     )}
                   >
                     {/* ── Sticky label cell ── */}
@@ -292,18 +292,6 @@ export const PivotTable = memo(function PivotTable({
                       )}
                     >
                       <div className={cn('flex items-center gap-2', meta?.indent && 'pl-5')}>
-                        {/* Icon pill */}
-                        {Icon && (
-                          <span
-                            className={cn(
-                              'inline-flex items-center justify-center w-6 h-6 rounded-md shrink-0',
-                              meta.iconBg
-                            )}
-                          >
-                            <Icon size={12} />
-                          </span>
-                        )}
-
                         {/* Label + tooltip */}
                         {tooltip ? (
                           <Tooltip>
@@ -345,7 +333,7 @@ export const PivotTable = memo(function PivotTable({
                           onClick={() => onCellClick(row.kpiType, m.month, m.label, m.sort)}
                           className={cn(
                             'px-3 py-2 border-l border-border/30',
-                            'cursor-pointer hover:brightness-95 dark:hover:brightness-125 transition-colors',
+                            'cursor-pointer transition-colors duration-150',
                             activeMonthSort === m.sort &&
                               'ring-1 ring-inset ring-blue-400/50 bg-blue-50/60 dark:bg-blue-900/20'
                           )}
