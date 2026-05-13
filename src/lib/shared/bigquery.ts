@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
   global.__bigquery__ = bigquery
 }
 
-export async function runQuery<T extends Record<string, unknown>>(
+export async function runQuery<T>(
   sql: string,
   params?: Record<string, unknown>
 ): Promise<T[]> {
